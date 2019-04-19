@@ -39,11 +39,23 @@ int main(int argc, char const *argv[]) {
     cin >> name;
     Table.insertPlayer(NULL, name);
   }
+  Table.reverseEntireNetwork();
   Table.printPlayers();
 
   //start the game
-  while(true)
+  while(numOfPlayers > 1)
   {
+    //get cards
+    // Table.dealCards();
+    Table.turn();
+    //print hand and cards on table
+    //cout << "It is now " << currentPlayer->name << "'s turn" << endl;
+
+
+
+
+    //getCards
+
     //every round
       //pull cards 2X numOfPlayers + 5 and burn one
       //deal cards to everyone

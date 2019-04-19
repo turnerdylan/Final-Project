@@ -16,7 +16,8 @@ struct Player
     //int playerNumber;
     Player *next;
     int wager;
-    int choice; //1 = fold, 2 = call, 3 = check
+    int choice; //0 = NA, 1 = fold, 2 = call, 3 = raise, 4 = check
+
 };
 
 // class for storing and manipulating linked-list of countries
@@ -38,6 +39,8 @@ class Table {
         void addWager(int bet);
         int displayChoice(int choice);
         void printPlayers();
+        void reverseEntireNetwork();
+        void turn();
 
 
 };
