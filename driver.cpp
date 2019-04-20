@@ -39,6 +39,7 @@ int main(int argc, char const *argv[]) {
     cin >> name;
     Table.insertPlayer(NULL, name);
   }
+  Table.repair();
   Table.reverseEntireNetwork();
   Table.printPlayers();
 

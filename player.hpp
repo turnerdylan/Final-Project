@@ -25,13 +25,14 @@ class Table {
     private:
         // pointer to head of linked-list of countries
         Player* head;
-        int amountOnTable;
+        // int amountOnTable;
 
     public:
         // See writeup for method descriptions
         Table();
         ~Table();
         void insertPlayer(Player* prev, std::string name);
+        void repair();
         void deletePlayer(std::string name);
         void addCardsToPlayer(std::string first, std::string second, Player* curr);
         void addThisMuch(Player* person, int money);
