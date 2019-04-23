@@ -16,16 +16,12 @@ struct Player
     //int playerNumber;
     Player *next;
     int wager;
-    int choice; //0 = NA, 1 = fold, 2 = call, 3 = raise, 4 = check
+    bool choice; //0 = NA, 1 = fold
 
 };
 
 // class for storing and manipulating linked-list of countries
 class Table {
-    private:
-        // pointer to head of linked-list of countries
-        Player* head;
-        // int amountOnTable;
 
     public:
         // See writeup for method descriptions
@@ -33,7 +29,7 @@ class Table {
         ~Table();
         void insertPlayer(Player* prev, std::string name);
         void repair();
-        void deletePlayer(std::string name);
+        void deletePlayer(Player* curr);
         void addCardsToPlayer(std::string first, std::string second, Player* curr);
         void addThisMuch(Player* person, int money);
         void takeThisMuch(Player* person, int money);
@@ -42,6 +38,10 @@ class Table {
         void printPlayers();
         void reverseEntireNetwork();
         void turn();
+        bool checkTurnOver(Player* curr, int maxBet);
+
+        Player* head;
+
 
 
 };

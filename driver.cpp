@@ -27,11 +27,6 @@ int main(int argc, char const *argv[]) {
     }
   }
 
-  int numOfAI;
-  cout << "How many AI players would you like? (this doesnt do anything yet)" << endl;
-  cin >> numOfAI;
-
-
   for(int i=0; i<numOfPlayers; i++)
   {
     string name;
@@ -43,12 +38,15 @@ int main(int argc, char const *argv[]) {
   Table.reverseEntireNetwork();
   Table.printPlayers();
 
+
+Table.turn();
+
   //start the game
   while(numOfPlayers > 1)
   {
     //get cards
     // Table.dealCards();
-    Table.turn();
+
     //print hand and cards on table
     //cout << "It is now " << currentPlayer->name << "'s turn" << endl;
 
