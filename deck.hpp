@@ -4,6 +4,7 @@
 
 #pragma once
 #include <iostream>
+#include <stack>
 
 const int tablesize = 52;
 
@@ -26,12 +27,13 @@ class Deck{
     int NumItemsIndex(int index);
     void PrintTable();
     bool createDeck();
-    std::string deal(int input);
+    std::string deal();
     void shuffle();
-    void print();
+    std::string getCard(int index);
     void printCardsIndex();
-    //string getcards(int index);
     //15 cards
+    std::stack<std::string> qdcards;
+    std::string curr[10];
 
 
 

@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
+#include <stack>
 #include <string>
 #include "deck.hpp"
 
 using namespace std;
 
-Deck Deck;
 
 Deck::Deck()
 {
@@ -20,9 +20,9 @@ Deck::Deck()
 
 void Deck :: AddCard(string suit, string value)
 {
-  int index = Hash(suit);
+  int index = Hash(value);
 
-  if(HashTable[index]->suit == "empty")
+  if(HashTable[index]->value == "empty")
   {
     HashTable[index]->suit = suit;
     HashTable[index]->value = value;
@@ -118,4 +118,79 @@ bool Deck :: createDeck()
     return false;
   }
    return true;
+}
+
+string Deck :: deal()
+{
+  string pass = qdcards.top();
+  qdcards.pop();
+
+}
+string Deck::getCard(int index)
+{
+  string send = "";
+  Card* Ptr = HashTable[index];
+  if(Ptr->value == "empty")
+  {
+    cout << index << " is empty" << endl;
+  }
+  else
+  {
+      cout << "index " << index << " contains" << endl;
+      while(Ptr!= NULL)
+      {
+        string temsuit = "";
+        string temvalue = "";
+        string temp = " of ";
+        string final = "";
+        int i = 0;
+
+        temsuit = Ptr->suit;
+        temvalue = Ptr->value;
+        final = temsuit + temp + temvalue;
+        curr[i] = final;
+        i++;
+
+        cout << Ptr->suit << endl;
+        cout << Ptr->value << endl;
+        Ptr = Ptr->next;
+      }
+      if(index == 5)
+      {
+        int find = rand()%8;
+        send = curr[find];
+      }
+      else
+      {
+        int find = rand()%4;
+        send = curr[find];
+      }
+
+      for(int i = 0; i <= 10; i++)
+      {
+        curr[i] = "";
+      }
+      return send;
+  }
+
+}
+
+void Deck :: shuffle()
+{
+  int index[] = {0,1,2,3,4,5,13,29,42,45,50,51};
+  int id;
+  int previd;
+
+  int counter = 0;
+
+  while(counter != 16)
+  {
+    string temp = "";
+
+    id = rand()%12;
+
+    temp = getCard(id);
+
+    qdcards.push(temp);
+  }
 }
