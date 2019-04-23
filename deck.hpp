@@ -26,7 +26,14 @@ class Deck{
     int NumItemsIndex(int index);
     void PrintTable();
     bool createDeck();
+    std::string deal(int input);
     void shuffle();
+    void print();
+    void printCardsIndex();
+    //string getcards(int index);
+    //15 cards
+
+
 
 };
 
