@@ -1,12 +1,15 @@
 #include <iostream>
 #include "player.hpp"
+#include "deck.hpp"
 
 using namespace std;
 
 
-int main(int argc, char const *argv[]) {
-
   Table Table;
+  Deck Deck;
+
+
+int main(int argc, char const *argv[]) {
 
   cout << "-------------------------------" << endl;
   cout << "---- WELCOME TO C++ POKER! ----" << endl;

@@ -1,8 +1,11 @@
 #include <iostream>
 #include "player.hpp"
+#include "deck.hpp"
 
 using namespace std;
 
+// Table Table;
+// Deck Deck;
 
 Table::Table()
 {
@@ -47,34 +50,6 @@ void Table::deletePlayer(Player* curr)
 
 }
 
-void Table::addCardsToPlayer(string first, string second, Player* curr)
-{
-  curr->card1 = first;
-  curr->card2 = second;
-}
-
-void Table::addThisMuch(Player* person, int money)
-{
-
-}
-
-void Table::takeThisMuch(Player* person, int money)
-{
-
-}
-
-void Table::addWager(int bet)
-{
-
-}
-
-int Table::displayChoice(int choice)
-{
-
-
-
-  return choice;
-}
 
 void Table::printPlayers()
 {
@@ -124,6 +99,32 @@ void Table::reverseEntireNetwork()
 //   return true;
 // }
 
+void Table::dealCards(Player* curr, int numOfPlayers)
+{
+  for(int i=0; i<numOfPlayers; i++)
+  {
+    curr->card1 = Deck.deal();
+    curr->card2 = Deck.deal();
+    curr = curr->next;
+  }
+  for(int i=0; i<5; i++)
+  {
+    tableCards[i] = Deck.deal();
+  }
+}
+
+int getNumOfPlayers(Player* head)
+{
+  int count = 0;
+  Player* hold = head->next;
+  while(hold != head)
+  {
+    count++;
+    hold = hold->next;
+  }
+  return count;
+}
+
 void resetPlayers(Player* head)
 {
   Player* hold = head->next;
@@ -137,8 +138,10 @@ void resetPlayers(Player* head)
   }
 }
 
-void Table::turn()
+int Table::turn()
 {
+  int numOfPlayers = getNumOfPlayers(head);
+  dealCards(head, numOfPlayers);
   int round = 1;
   int amountOnTable = 0;
   int maxBet = 1;
@@ -188,11 +191,16 @@ void Table::turn()
           cout << endl;
           cout << endl;
           cout << "These are the cards on the table" << endl;
-          cout << "(insert cards here)" << endl;
+          for(int i=0; i<5; i++)
+          {
+            cout << tableCards[i] << "  ";
+          }
+          cout << endl;
+
           cout << endl;
           cout << endl;
           cout << "These are the cards in your hand" << endl;
-          cout << "(insert cards here)" << endl;
+          cout << current->card1 << " & " << current->card2 << endl;
           cout << endl;
           cout << endl;
 
@@ -294,7 +302,7 @@ void Table::turn()
       }
     }
 
-    cout << "round " << round << "done. flip cards" << endl;
+    cout << "round " << round << " done. flip cards" << endl;
     resetPlayers(head);
     round++;
 

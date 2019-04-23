@@ -30,17 +30,14 @@ class Table {
         void insertPlayer(Player* prev, std::string name);
         void repair();
         void deletePlayer(Player* curr);
-        void addCardsToPlayer(std::string first, std::string second, Player* curr);
-        void addThisMuch(Player* person, int money);
-        void takeThisMuch(Player* person, int money);
-        void addWager(int bet);
-        int displayChoice(int choice);
         void printPlayers();
         void reverseEntireNetwork();
-        void turn();
+        int turn();
         bool checkTurnOver(Player* curr, int maxBet);
+        void dealCards(Player* curr, int numOfPlayers);
 
         Player* head;
+        std::string tableCards [5];
 
 
 
