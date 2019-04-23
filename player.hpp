@@ -4,6 +4,7 @@
 
 #pragma once
 #include <iostream>
+#include "deck.hpp"
 
 // Country: node struct that will be stored in the CountryNetwork
 //   linked-list
@@ -11,8 +12,8 @@ struct Player
 {
     std::string name;
     int money;
-    std::string card1;
-    std::string card2;
+    Card card1;
+    Card card2;
     //int playerNumber;
     Player *next;
     int wager;
@@ -37,7 +38,7 @@ class Table {
         void dealCards(Player* curr, int numOfPlayers);
 
         Player* head;
-        std::string tableCards [5];
+        Card tableCards [5];
 
 
 

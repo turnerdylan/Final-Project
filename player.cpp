@@ -5,7 +5,7 @@
 using namespace std;
 
 // Table Table;
-Deck Deck;
+// Deck Deck;
 
 Table::Table()
 {
@@ -103,13 +103,17 @@ void Table::dealCards(Player* curr, int numOfPlayers)
 {
   for(int i=0; i<numOfPlayers; i++)
   {
-    curr->card1 = Deck.deal();
-    curr->card2 = Deck.deal();
+    curr->card1.suit = "Deck.deal()";
+    curr->card1.value = "Deck.deal()";
+
+    curr->card2.suit = "Deck.deal()";
+    curr->card2.value = "Deck.deal()";
     curr = curr->next;
   }
   for(int i=0; i<5; i++)
   {
-    tableCards[i] = Deck.deal();
+    tableCards[i].suit = "Deck.deal()";
+    tableCards[i].value = "Deck.deal()";
   }
 }
 
@@ -131,10 +135,98 @@ void resetPlayers(Player* head)
   while(hold != head)
   {
     hold->wager = 0;
-    hold->card1 = "";
-    hold->card2 = "";
+    hold->card1.suit = "";
+    hold->card1.value = "";
+
+    hold->card2.suit = "";
+    hold->card2.value = "";
     hold->choice = 0;
     hold = hold->next;
+  }
+}
+
+Player* findWinner(Player* head, Card arr[], int numOfPlayers)
+{
+  Player* bestHand;
+  int valueArray[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  int suitArray[4] = {0, 0, 0, 0};
+  for(int i=0; i<numOfPlayers; i++)
+  {
+    Player* curr = head->next;
+    Card newArray[7];
+    for(int k=0; k<5; k++)
+    {
+      newArray[k] = arr[k];
+    }
+    newArray[5] = curr->card1;
+    newArray[6] = curr->card2;
+
+    for(int j=0; j<7; j++)
+    {
+      if(newArray[j].value == "Ace") valueArray[0]++;
+      if(newArray[j].value == "2") valueArray[1]++;
+      if(newArray[j].value == "3") valueArray[2]++;
+      if(newArray[j].value == "4") valueArray[3]++;
+      if(newArray[j].value == "5") valueArray[4]++;
+      if(newArray[j].value == "6") valueArray[5]++;
+      if(newArray[j].value == "7") valueArray[6]++;
+      if(newArray[j].value == "8") valueArray[7]++;
+      if(newArray[j].value == "9") valueArray[8]++;
+      if(newArray[j].value == "10") valueArray[9]++;
+      if(newArray[j].value == "J") valueArray[10]++;
+      if(newArray[j].value == "Q") valueArray[11]++;
+      if(newArray[j].value == "K") valueArray[12]++;
+
+      if(newArray[j].suit == "spades") suitArray[0]++;
+      if(newArray[j].suit == "hearts") suitArray[1]++;
+      if(newArray[j].suit == "diamonds") suitArray[2]++;
+      if(newArray[j].suit == "clubs") suitArray[3]++;
+    }
+    for(int l=0; l<13; l++)
+    {
+      if(valueArray[l] == 1 && valueArray[l+1] == 1 && valueArray[l+2] == 1 && valueArray[l+3] == 1 && valueArray[l+4] == 1)
+      {
+        //straight
+      }
+      if(valueArray[l] == 4)
+      {
+
+      } //4 of a kind
+      else if(valueArray[l] == 3)
+      {
+        for(int m=0; m<13; m++)
+        {
+          if(valueArray[m] == 2)
+          {
+            //full house
+          }
+        }
+        //if not then full house
+      }
+      else if (valueArray[l] == 2)
+      {
+        for(int m=0; m<13; m++)
+        {
+          if(valueArray[m] == 2)
+          {
+            //2 pair
+          }
+        }
+        //if not then single pair
+      }
+
+    }
+    //royal flush
+
+    //stright flush
+    //four of a kind//
+    //full house//
+    //flush
+    //straight//
+    //3 of a kind//
+    //2 pair//
+    //pair//
+    //high card
   }
 }
 
@@ -193,14 +285,15 @@ int Table::turn()
           cout << "These are the cards on the table" << endl;
           for(int i=0; i<5; i++)
           {
-            cout << tableCards[i] << "  ";
+            cout << "[" << tableCards[i].value << " of " << tableCards[i].suit << "] , ";
           }
           cout << endl;
 
           cout << endl;
           cout << endl;
           cout << "These are the cards in your hand" << endl;
-          cout << current->card1 << " & " << current->card2 << endl;
+          cout << "[" << current->card1.value << " of " << current->card1.suit << "] , ";
+          cout << "[" << current->card2.value << " of " << current->card2.suit << "] , ";
           cout << endl;
           cout << endl;
 
@@ -303,7 +396,6 @@ int Table::turn()
     }
 
     cout << "round " << round << " done. flip cards" << endl;
-    resetPlayers(head);
     round++;
 
   }
@@ -312,6 +404,7 @@ int Table::turn()
   if(round == 3)
   {
     cout << "End of hand and restart" << endl;
+    resetPlayers(head);
 
     //calculate winner
     //pay winner
