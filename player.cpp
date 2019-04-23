@@ -5,7 +5,7 @@
 using namespace std;
 
 // Table Table;
-// Deck Deck;
+Deck Deck;
 
 Table::Table()
 {
