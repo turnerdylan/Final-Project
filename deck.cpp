@@ -107,7 +107,7 @@ bool Deck :: createDeck()
   {
     while(file >> value >> suit)
     {
-        cout << value << "  " << suit << endl;
+        //cout << value << "  " << suit << endl;
         AddCard(suit, value);
     }
     file.close();
@@ -125,6 +125,8 @@ string Deck :: deal()
   string pass = qdcards.top();
   qdcards.pop();
 
+  return pass;
+
 }
 string Deck::getCard(int index)
 {
@@ -136,33 +138,33 @@ string Deck::getCard(int index)
   }
   else
   {
-      cout << "index " << index << " contains" << endl;
+      int i = 0;
+      //cout << "index " << index << " contains" << endl;
       while(Ptr!= NULL)
       {
         string temsuit = "";
         string temvalue = "";
         string temp = " of ";
         string final = "";
-        int i = 0;
 
         temsuit = Ptr->suit;
         temvalue = Ptr->value;
-        final = temsuit + temp + temvalue;
+        final = temvalue + temp + temsuit;
         curr[i] = final;
         i++;
 
-        cout << Ptr->suit << endl;
-        cout << Ptr->value << endl;
+        //cout << Ptr->suit << endl;
+        //cout << Ptr->value << endl;
         Ptr = Ptr->next;
       }
       if(index == 5)
       {
-        int find = rand()%8;
+        int find = rand()%7;
         send = curr[find];
       }
       else
       {
-        int find = rand()%4;
+        int find = rand()%3;
         send = curr[find];
       }
 
@@ -179,6 +181,7 @@ void Deck :: shuffle()
 {
   int index[] = {0,1,2,3,4,5,13,29,42,45,50,51};
   int id;
+  int aid;
   int previd;
 
   int counter = 0;
@@ -188,9 +191,11 @@ void Deck :: shuffle()
     string temp = "";
 
     id = rand()%12;
+    aid = index[id];
 
-    temp = getCard(id);
+    temp = getCard(aid);
 
     qdcards.push(temp);
+    counter++;
   }
 }
